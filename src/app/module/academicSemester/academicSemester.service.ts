@@ -102,9 +102,25 @@ const updateIntoDB = async (
   return result;
 };
 
+const deleteFromDB = async (id: string): Promise<AcademicSemester | null> => {
+  const result = await prisma.academicSemester.delete({
+    where: {
+      id,
+    },
+    // include{
+    //   academicSemester: true,
+    //   acedemicDepartment: true,
+    //   academicFaculty: true
+    // }
+    // Note: update a o add kora jay
+  });
+  return result;
+};
+
 export const AcademicSemesterService = {
   insertIntoDB,
   getAllFromDB,
   getDataById,
   updateIntoDB,
+  deleteFromDB,
 };

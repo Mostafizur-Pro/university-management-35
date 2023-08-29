@@ -17,5 +17,6 @@ router.patch(
   validateRequest(AcademicSemesterValidation.update),
   AcademicSemesterController.updateIntoDB
 );
+router.delete('/:id', AcademicSemesterController.deleteFromDB);
 
 export const AcademicSemesterRoutes = router;
