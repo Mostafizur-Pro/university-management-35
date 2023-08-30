@@ -10,13 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model User{
-  id String @id @default(uuid())
+model User {
+  id   String @id @default(uuid())
   name String
 }
-
-
 
 model AcademicSemester {
   id         String    @id @default(uuid())
@@ -106,4 +103,27 @@ model Faculty {
   academicFacultyId String
 
   @@map("faculties")
+}
+
+model Building {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rooms     Room[]
+
+  @@map("buildings")
+}
+
+model Room {
+  id         String   @id @default(uuid())
+  roomNumber String
+  floor      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  buildings  Building @relation(fields: [buildingId], references: [id])
+  buildingId String
+
+  @@map("rooms")
 }
